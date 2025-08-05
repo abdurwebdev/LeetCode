@@ -5,6 +5,7 @@
 Write a function `argumentsLength` that returns the count of arguments passed to it.
 
 This problem tests understanding of:
+
 - Rest parameters (`...args`)
 - Function arguments
 - Array length property
@@ -13,6 +14,7 @@ This problem tests understanding of:
 ## Examples
 
 ### Example 1:
+
 ```javascript
 Input: argumentsLength(1, 2, 3)
 Output: 3
@@ -20,6 +22,7 @@ Explanation: The function receives 3 arguments: 1, 2, and 3.
 ```
 
 ### Example 2:
+
 ```javascript
 Input: argumentsLength({}, null, "3")
 Output: 3
@@ -27,6 +30,7 @@ Explanation: The function receives 3 arguments: an empty object, null, and the s
 ```
 
 ### Example 3:
+
 ```javascript
 Input: argumentsLength()
 Output: 0
@@ -34,6 +38,7 @@ Explanation: The function receives no arguments.
 ```
 
 ### Example 4:
+
 ```javascript
 Input: argumentsLength("hello", "world", "javascript", "programming")
 Output: 4
@@ -48,12 +53,15 @@ Explanation: The function receives 4 string arguments.
 ## Solution Approach
 
 ### Rest Parameters Method
+
 The solution uses ES6 rest parameters to capture all arguments:
+
 1. Use rest parameters (`...args`) to collect all arguments into an array
 2. Return the length of the arguments array using `args.length`
 3. This approach works for any number of arguments (0 to 100)
 
 ### Time Complexity
+
 - **Time Complexity**: O(1) - constant time operation
 - **Space Complexity**: O(n) - where n is the number of arguments
 
@@ -64,8 +72,8 @@ The solution uses ES6 rest parameters to capture all arguments:
  * @param {...(null|boolean|number|string|Array|Object)} args
  * @return {number}
  */
-var argumentsLength = function(...args) {
-    return args.length;
+var argumentsLength = function (...args) {
+  return args.length;
 };
 
 // Example usage:
@@ -77,15 +85,17 @@ console.log(argumentsLength()); // 0
 ## Alternative Solutions
 
 ### Using Arguments Object (Legacy)
+
 A traditional approach using the arguments object:
 
 ```javascript
-var argumentsLength = function() {
-    return arguments.length;
+var argumentsLength = function () {
+  return arguments.length;
 };
 ```
 
 ### Using Arrow Function
+
 A more concise version using arrow functions:
 
 ```javascript
@@ -93,11 +103,12 @@ var argumentsLength = (...args) => args.length;
 ```
 
 ### Using Function Expression
+
 Another approach using function expression:
 
 ```javascript
-var argumentsLength = function() {
-    return arguments.length;
+var argumentsLength = function () {
+  return arguments.length;
 };
 ```
 
@@ -129,36 +140,40 @@ console.log(argumentsLength({}, [], null, undefined)); // 4
 console.log(argumentsLength(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)); // 10
 
 // Test with mixed types
-console.log(argumentsLength(42, "string", true, null, [1, 2, 3], {key: "value"})); // 6
+console.log(
+  argumentsLength(42, "string", true, null, [1, 2, 3], { key: "value" })
+); // 6
 ```
 
 ## Advanced Usage
 
 ### Function Composition
+
 ```javascript
 // Create a function that logs the number of arguments
 function logArgumentCount(...args) {
-    console.log(`Function received ${argumentsLength(...args)} arguments`);
-    return argumentsLength(...args);
+  console.log(`Function received ${argumentsLength(...args)} arguments`);
+  return argumentsLength(...args);
 }
 
 logArgumentCount(1, 2, 3); // "Function received 3 arguments"
 ```
 
 ### Conditional Logic Based on Argument Count
+
 ```javascript
 function processArguments(...args) {
-    const count = argumentsLength(...args);
-    
-    if (count === 0) {
-        return "No arguments provided";
-    } else if (count === 1) {
-        return "Single argument provided";
-    } else if (count <= 5) {
-        return "Few arguments provided";
-    } else {
-        return "Many arguments provided";
-    }
+  const count = argumentsLength(...args);
+
+  if (count === 0) {
+    return "No arguments provided";
+  } else if (count === 1) {
+    return "Single argument provided";
+  } else if (count <= 5) {
+    return "Few arguments provided";
+  } else {
+    return "Many arguments provided";
+  }
 }
 
 console.log(processArguments()); // "No arguments provided"
@@ -168,26 +183,31 @@ console.log(processArguments(1, 2, 3, 4, 5, 6)); // "Many arguments provided"
 ```
 
 ### Validation Functions
+
 ```javascript
 // Function that validates argument count
 function validateArguments(minCount, maxCount, ...args) {
-    const count = argumentsLength(...args);
-    
-    if (count < minCount) {
-        throw new Error(`Too few arguments. Expected at least ${minCount}, got ${count}`);
-    }
-    
-    if (count > maxCount) {
-        throw new Error(`Too many arguments. Expected at most ${maxCount}, got ${count}`);
-    }
-    
-    return count;
+  const count = argumentsLength(...args);
+
+  if (count < minCount) {
+    throw new Error(
+      `Too few arguments. Expected at least ${minCount}, got ${count}`
+    );
+  }
+
+  if (count > maxCount) {
+    throw new Error(
+      `Too many arguments. Expected at most ${maxCount}, got ${count}`
+    );
+  }
+
+  return count;
 }
 
 try {
-    validateArguments(2, 4, 1, 2, 3, 4, 5); // Error: Too many arguments
+  validateArguments(2, 4, 1, 2, 3, 4, 5); // Error: Too many arguments
 } catch (error) {
-    console.log(error.message);
+  console.log(error.message);
 }
 ```
 
@@ -232,11 +252,13 @@ try {
 ## Common Interview Questions
 
 1. **What's the difference between rest parameters and the arguments object?**
+
    - Rest parameters create a real array, arguments object is array-like
    - Rest parameters work with arrow functions, arguments object doesn't
    - Rest parameters are more performant
 
 2. **How would you handle variable arguments in older JavaScript?**
+
    - Use the `arguments` object
    - Convert to array using `Array.from(arguments)` or `[...arguments]`
 
@@ -250,21 +272,25 @@ try {
 ```javascript
 // Comprehensive testing
 function testArgumentsLength() {
-    const testCases = [
-        { args: [], expected: 0 },
-        { args: [1], expected: 1 },
-        { args: [1, 2, 3], expected: 3 },
-        { args: ["a", "b", "c", "d"], expected: 4 },
-        { args: [null, undefined, 0, false, ""], expected: 5 },
-        { args: [{}, [], function(){}], expected: 3 }
-    ];
-    
-    testCases.forEach((testCase, index) => {
-        const result = argumentsLength(...testCase.args);
-        const passed = result === testCase.expected;
-        console.log(`Test ${index + 1}: ${passed ? 'PASS' : 'FAIL'} - Expected ${testCase.expected}, got ${result}`);
-    });
+  const testCases = [
+    { args: [], expected: 0 },
+    { args: [1], expected: 1 },
+    { args: [1, 2, 3], expected: 3 },
+    { args: ["a", "b", "c", "d"], expected: 4 },
+    { args: [null, undefined, 0, false, ""], expected: 5 },
+    { args: [{}, [], function () {}], expected: 3 },
+  ];
+
+  testCases.forEach((testCase, index) => {
+    const result = argumentsLength(...testCase.args);
+    const passed = result === testCase.expected;
+    console.log(
+      `Test ${index + 1}: ${passed ? "PASS" : "FAIL"} - Expected ${
+        testCase.expected
+      }, got ${result}`
+    );
+  });
 }
 
 testArgumentsLength();
-``` 
+```
